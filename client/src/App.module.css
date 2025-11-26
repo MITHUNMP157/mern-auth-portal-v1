@@ -1,0 +1,37 @@
+.navbar {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #f3f3f3;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+}
+
+.form-box {
+  width: 350px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.form-box input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+}
+
+.form-box button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  background: #2c7df0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
