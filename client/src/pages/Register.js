@@ -4,6 +4,8 @@ import axios from "axios";
 import styles from "./Register.module.css";
 
 export default function Register() {
+  const API_URL = process.env.REACT_APP_LOCAL_API_URL;
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -23,13 +25,16 @@ export default function Register() {
     }
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        `https://login-user-managements-system-client.onrender.com/api/auth/register`,
         form
       );
+      const data = res.data;
       alert(res.data.message);
+      window.location.href = "/login";
       console.log(res.data);
+      console.log(data);
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
     }
   };
 
@@ -61,14 +66,18 @@ export default function Register() {
           value={form.password}
           onChange={handleChange}
         />
-        <input
-          placeholder="Role"
-          type="text"
-          className={styles.input}
+        <select
           name="role"
           value={form.role}
+          className={styles.input}
           onChange={handleChange}
-        />
+        >
+          <option value="" disabled>
+            Select Role
+          </option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
         <button className={styles.button}>Register</button>
         <p className={styles.linkText}>
           Already have an account? <a href="/login">Login</a>

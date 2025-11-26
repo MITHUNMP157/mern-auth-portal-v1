@@ -9,9 +9,12 @@ export default function AdminPage() {
     const token = localStorage.getItem("token");
 
     axios
-      .get("http://localhost:5000/api/auth/users", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .get(
+        "https://login-user-managements-system-client.onrender.com/api/auth/users",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => setUsers(res.data))
       .catch((err) => console.log(err.message));
   }, []);

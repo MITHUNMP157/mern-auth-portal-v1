@@ -9,6 +9,14 @@ export default function Home() {
         <p className={styles.subtitle}>
           Manage your account with secure authentication.
         </p>
+        <div className={styles.buttons}>
+          <Link to="/login" className={styles.btnPrimary}>
+            Login
+          </Link>
+          <Link to="/register" className={styles.btnSecondary}>
+            Create Account
+          </Link>
+        </div>
       </div>
     </div>
   );

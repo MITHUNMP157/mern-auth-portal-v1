@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { API } from "../api";
 import styles from "./Login.module.css";
 
 export default function Login() {
@@ -15,7 +16,7 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://login-user-managements-system-client.onrender.com/api/auth/login",
         form
       );
 
