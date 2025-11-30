@@ -5,10 +5,14 @@ import styles from "./Navbar.module.css";
 export default function Navbar() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [access, setAccess] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
     setLoggedIn(!!token);
+    setAccess(role);
   }, []);
 
   const handleLogout = () => {
@@ -19,7 +23,11 @@ export default function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <h1 className={styles.logo}>MERN Auth</h1>
+      <h1 className={styles.logo}>
+        <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          MERN Auth
+        </Link>
+      </h1>
 
       <ul className={styles.navLinks}>
         {loggedIn && (
@@ -36,12 +44,15 @@ export default function Navbar() {
                 Profile
               </Link>
             </li>
-
-            <li>
-              <Link className={styles.link} to="/admin">
-                Admin
-              </Link>
-            </li>
+            {access === "user" ? (
+              ""
+            ) : (
+              <li>
+                <Link className={styles.link} to="/admin">
+                  Admin
+                </Link>
+              </li>
+            )}
 
             <li>
               <button className={styles.logoutBtn} onClick={handleLogout}>

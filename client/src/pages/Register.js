@@ -25,7 +25,7 @@ export default function Register() {
     }
     try {
       const res = await axios.post(
-        `https://login-user-managements-system-client.onrender.com/api/auth/register`,
+        `${process.env.REACT_APP_API_URL}/register`,
         form
       );
       const data = res.data;

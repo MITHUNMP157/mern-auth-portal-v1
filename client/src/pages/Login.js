@@ -16,18 +16,19 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        "https://login-user-managements-system-client.onrender.com/api/auth/login",
+        `${process.env.REACT_APP_API_URL}/login`,
         form
       );
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
       localStorage.setItem("userId", res.data.userId);
+      localStorage.setItem("userName", res.data.name);
 
       if (res.data.role === "admin") {
-        window.location.href = "/admin";
+        window.location.href = "/";
       } else {
-        window.location.href = "/profile";
+        window.location.href = "/";
       }
 
       alert("Logged in successfully!");

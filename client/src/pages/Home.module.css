@@ -38,6 +38,7 @@
 
 .btnPrimary {
   padding: 12px 25px;
+  border: 1px solid rgba(255, 255, 255, 0.421);
   background: #4a90e2;
   color: white;
   text-decoration: none;
@@ -52,6 +53,7 @@
 
 .btnSecondary {
   padding: 12px 25px;
+  border: 1px solid rgba(37, 37, 37, 0.129);
   background: #e5e7eb;
   color: #333;
   text-decoration: none;

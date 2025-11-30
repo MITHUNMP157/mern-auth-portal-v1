@@ -36,10 +36,50 @@ export const login = async (req, res) => {
       token,
       role: user.role,
       userId: user._id,
+      userName: user.name,
     });
   } catch (error) {
     console.log("Login Error:", error.message);
     res.status(400).json({ error: error.message });
+  }
+};
+export const userData = async (req, res) => {
+  const users = await User.find().select("-password");
+  res.json(users);
+};
+
+export const profileData = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const updateUser = async (req, res, next) => {
+  try {
+    const updateData = { ...req.body };
+    delete updateData.password;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "User updated successfully", user: updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: "Update failed", error: error.message });
   }
 };
 

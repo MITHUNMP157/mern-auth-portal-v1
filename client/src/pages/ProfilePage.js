@@ -5,17 +5,34 @@ import styles from "./ProfilePage.module.css";
 export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
 
-  useEffect(() => {
+  const fetchUserData = async () => {
     const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
 
-    axios
-      .get("http://localhost:5000/api/auth/profile", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setProfile(res.data))
-      .catch((err) => console.log(err));
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/profile/${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const data = response.data;
+      setProfile(data);
+      console.log(data);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else {
+        console.log(`Error: ${error}`);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
   }, []);
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>User Profile</h1>
