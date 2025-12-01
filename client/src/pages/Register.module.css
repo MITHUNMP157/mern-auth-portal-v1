@@ -34,7 +34,7 @@
   width: 100%;
   padding: 12px;
   margin-top: 18px;
-  background: #4b7bec;
+  background: #0a4adf;
   color: white;
   border: none;
   border-radius: 8px;
@@ -44,7 +44,7 @@
 }
 
 .button:hover {
-  background: #3867d6;
+  background: #0a3eb8;
 }
 
 .linkText {

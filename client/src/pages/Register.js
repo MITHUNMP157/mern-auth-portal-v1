@@ -13,6 +13,7 @@ export default function Register() {
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -35,12 +36,14 @@ export default function Register() {
     }
 
     try {
+      setLoading(true);
       await register(name, email, password, role);
       setSuccess("Register  Successfully");
       alert("Register  Successfully");
       setError("");
       navigate("/login");
     } catch (error) {
+      setLoading(false);
       console.log("Register Error:", error.message);
       setError(error.message || "Register Failed");
       alert("Register Failed");
@@ -95,7 +98,18 @@ export default function Register() {
           <option value="admin">Admin</option>
           <option value="user">User</option>
         </select>
-        <button className={styles.button}>Register</button>
+        <button className={styles.button} disabled={loading}>
+          Register
+        </button>
+        {loading ? (
+          <div className="d-flex justify-content-center mt-3">
+            <div className="spinner-border text-danger" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
         <p className={styles.linkText}>
           Already have an account? <Link to="/login">Login</Link> |{" "}
           <Link to="/">Back to Home</Link>

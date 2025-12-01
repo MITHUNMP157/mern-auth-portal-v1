@@ -11,6 +11,7 @@ export default function Login() {
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -31,12 +32,14 @@ export default function Login() {
     }
 
     try {
+      setLoading(true);
       await login(email, password);
       setSuccess("Login  Successfully");
       alert("Login  Successfully");
       setError("");
       navigate("/home");
     } catch (error) {
+      setLoading(false);
       console.log("Login Error:", error.message);
       alert("Login Failed");
       setError(error.message || "Login Failed");
@@ -70,7 +73,18 @@ export default function Login() {
           value={userLoginData.password}
           onChange={handleChange}
         />
-        <button className={styles.button}>Login</button>
+        <button className={styles.button} disabled={loading}>
+          Login
+        </button>
+        {loading ? (
+          <div className="d-flex justify-content-center mt-3">
+            <div className="spinner-border text-danger" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
         <p className={styles.linkText}>
           Don't have an account? <Link to="/register">Create</Link>|{" "}
           <Link to="/">Back to Home</Link>
