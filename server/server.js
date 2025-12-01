@@ -11,27 +11,14 @@ const app = express();
 connectDB();
 
 //app.use(cors());
-//app.use(
-//  cors({
-//    origin: [
-//      "https://login-user-managements-system-client.onrender.com",
-//      "http://localhost:5000",
-//    ], // your deployed frontend URL
-//    methods: ["GET", "POST", "PUT", "DELETE"],
-//    credentials: true,
-//  })
-//);
-
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://login-user-managements-system-client.onrender.com",
-    ],
+    origin: ["https://login-user-managements-system-client.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
