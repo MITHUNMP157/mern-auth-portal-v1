@@ -7,6 +7,7 @@ import Navbar from "./component/Navbar";
 import WelcomePage from "./pages/WelcomePage.js";
 import Home from "./pages/Home.js";
 import ProductedRoute from "./routes/productedRoute.js";
+import UpdateUser from "./pages/UpdateUser.js";
 
 export default function App() {
   return (
@@ -39,7 +40,15 @@ export default function App() {
             </ProductedRoute>
           }
         />
-
+        <Route
+          path="/update/:id"
+          element={
+            <ProductedRoute>
+              <Navbar />
+              <UpdateUser />
+            </ProductedRoute>
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<WelcomePage />} />

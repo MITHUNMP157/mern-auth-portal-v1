@@ -5,6 +5,10 @@
   margin-top: 20px;
 }
 
+.adminTitle {
+  text-align: center;
+}
+
 .userTable th,
 .userTable td {
   border: 1px solid #ddd;

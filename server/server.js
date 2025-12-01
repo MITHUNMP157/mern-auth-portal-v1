@@ -10,14 +10,14 @@ dotenv.config();
 const app = express();
 connectDB();
 
-//app.use(cors());
-app.use(
-  cors({
-    origin: ["https://login-user-managements-system-client.onrender.com"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors());
+//app.use(
+//  cors({
+//    origin: ["https://login-user-managements-system-client.onrender.com"],
+//    methods: ["GET", "POST", "PUT", "DELETE"],
+//    credentials: true,
+//  })
+//);
 
 app.use(express.json());
 

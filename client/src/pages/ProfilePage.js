@@ -11,7 +11,7 @@ export default function ProfilePage() {
 
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/profile/${userId}`,
+        `${process.env.REACT_APP_API_URL}/user/${userId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -20,9 +20,9 @@ export default function ProfilePage() {
       setProfile(data);
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data);
+        console.log(error.response);
       } else {
-        console.log(`Error: ${error}`);
+        console.log(`Error: ${error.message}`);
       }
     }
   };

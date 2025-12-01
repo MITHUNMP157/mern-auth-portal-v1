@@ -62,7 +62,7 @@ router.get("/users", verifyToken, isAdmin, async (req, res, next) => {
       .json({ message: "Failed to fetch users", error: error.message });
   }
 });
-router.get("/profile/:id", async (req, res) => {
+router.get("/user/:id", verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select("-password");
 
@@ -73,6 +73,38 @@ router.get("/profile/:id", async (req, res) => {
     res.json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+router.put("/user/:id", verifyToken, isAdmin, async (req, res) => {
+  try {
+    const { name, email, role } = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { name, email, role },
+      { new: true }
+    ).select("-password");
+
+    if (!updatedUser)
+      return res.status(404).json({ message: "User Not Found" });
+
+    res.json({ message: "User Updated Successfully", updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: "Update Failed", error });
+  }
+});
+
+router.delete("/user/:id", verifyToken, isAdmin, async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+    if (!deletedUser)
+      return res.status(404).json({ message: "User Not Found" });
+
+    res.json({ message: "User Deleted Successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Delete Failed", error });
   }
 });
 

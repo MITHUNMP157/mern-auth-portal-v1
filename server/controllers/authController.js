@@ -68,23 +68,34 @@ export const profileData = async (req, res) => {
   }
 };
 
-export const updateUser = async (req, res, next) => {
+export const updateUser = async (req, res) => {
   try {
-    const updateData = { ...req.body };
-    delete updateData.password;
+    const { name, email, role } = req.body;
 
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      updateData,
-      { new: true, runValidators: true }
+      { name, email, role },
+      { new: true }
     ).select("-password");
 
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
+    if (!updatedUser)
+      return res.status(404).json({ message: "User Not Found" });
 
-    res.json({ message: "User updated successfully", user: updatedUser });
+    res.json({ message: "User Updated Successfully", updatedUser });
   } catch (error) {
-    res.status(500).json({ message: "Update failed", error: error.message });
+    res.status(500).json({ message: "Update Failed", error });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+    if (!deletedUser)
+      return res.status(404).json({ message: "User Not Found" });
+
+    res.json({ message: "User Deleted Successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Delete Failed", error });
   }
 };
