@@ -11,48 +11,46 @@ import UpdateUser from "./pages/UpdateUser.js";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/home"
-          element={
-            <ProductedRoute>
-              <Navbar />
-              <Home />
-            </ProductedRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProductedRoute>
-              <Navbar />
-              <ProfilePage />
-            </ProductedRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <ProductedRoute>
-              <Navbar />
-              <AdminPage />
-            </ProductedRoute>
-          }
-        />
-        <Route
-          path="/update/:id"
-          element={
-            <ProductedRoute>
-              <Navbar />
-              <UpdateUser />
-            </ProductedRoute>
-          }
-        />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<WelcomePage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route
+        path="/home"
+        element={
+          <ProductedRoute>
+            <Navbar />
+            <Home />
+          </ProductedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProductedRoute>
+            <Navbar />
+            <ProfilePage />
+          </ProductedRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <ProductedRoute>
+            <Navbar />
+            <AdminPage />
+          </ProductedRoute>
+        }
+      />
+      <Route
+        path="/update/:id"
+        element={
+          <ProductedRoute>
+            <Navbar />
+            <UpdateUser />
+          </ProductedRoute>
+        }
+      />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<WelcomePage />} />
+    </Routes>
   );
 }
