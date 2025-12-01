@@ -10,9 +10,6 @@ export default function AdminPage() {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    try {
-    } catch (error) {}
-
     axios
       .get(`${process.env.REACT_APP_API_URL}/users`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -20,22 +17,6 @@ export default function AdminPage() {
       .then((res) => setUsers(res.data))
       .catch((err) => console.log(err.message));
   }, []);
-
-  const handleDelete = async (id) => {
-    const token = localStorage.getItem("token");
-    try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/users/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setUsers(users.filter((u) => u._id !== id));
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
-  const handleUpdate = (id) => {
-    navigate(`/updateuser`);
-  };
 
   return (
     <div className={styles.adminContainer}>
@@ -48,10 +29,8 @@ export default function AdminPage() {
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
-            <th>Actions</th>
           </tr>
         </thead>
-
         <tbody>
           {users.map((user, index) => (
             <tr key={user._id}>
@@ -59,20 +38,6 @@ export default function AdminPage() {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.role}</td>
-              <td>
-                <button
-                  className={styles.updateBtn}
-                  onClick={() => handleUpdate(user._id)}
-                >
-                  Update
-                </button>
-                <button
-                  className={styles.deleteBtn}
-                  onClick={() => handleDelete(user._id)}
-                >
-                  Delete
-                </button>
-              </td>
             </tr>
           ))}
         </tbody>

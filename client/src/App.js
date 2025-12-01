@@ -4,20 +4,45 @@ import Login from "./pages/Login";
 import AdminPage from "./pages/AdminPage.js";
 import ProfilePage from "./pages/ProfilePage.js";
 import Navbar from "./component/Navbar";
+import WelcomePage from "./pages/WelcomePage.js";
 import Home from "./pages/Home.js";
-import UpdatedUser from "./pages/UpdatedUser.js";
+import ProductedRoute from "./routes/productedRoute.js";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <ProductedRoute>
+              <Navbar />
+              <Home />
+            </ProductedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProductedRoute>
+              <Navbar />
+              <ProfilePage />
+            </ProductedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProductedRoute>
+              <Navbar />
+              <AdminPage />
+            </ProductedRoute>
+          }
+        />
+
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/updateuser" element={<UpdatedUser />} />
+        <Route path="/" element={<WelcomePage />} />
       </Routes>
     </BrowserRouter>
   );

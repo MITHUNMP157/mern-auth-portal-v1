@@ -17,7 +17,10 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    localStorage.removeItem("role");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
+    navigate("/");
     setLoggedIn(false);
   };
 
@@ -30,53 +33,34 @@ export default function Navbar() {
       </h1>
 
       <ul className={styles.navLinks}>
-        {loggedIn && (
+        <li>
+          <Link className={styles.link} to="/home">
+            Home
+          </Link>
+        </li>
+
+        <>
           <li>
-            <Link className={styles.link} to="/">
-              Home
+            <Link className={styles.link} to="/profile">
+              Profile
             </Link>
           </li>
-        )}
-        {loggedIn && (
-          <>
+          {access === "admin" ? (
             <li>
-              <Link className={styles.link} to="/profile">
-                Profile
+              <Link className={styles.link} to="/admin">
+                Admin
               </Link>
             </li>
-            {access === "user" ? (
-              ""
-            ) : (
-              <li>
-                <Link className={styles.link} to="/admin">
-                  Admin
-                </Link>
-              </li>
-            )}
+          ) : (
+            ""
+          )}
 
-            <li>
-              <button className={styles.logoutBtn} onClick={handleLogout}>
-                Logout
-              </button>
-            </li>
-          </>
-        )}
-
-        {!loggedIn && (
-          <>
-            <li>
-              <Link className={styles.link} to="/login">
-                Login
-              </Link>
-            </li>
-
-            <li>
-              <Link className={styles.link} to="/register">
-                Register
-              </Link>
-            </li>
-          </>
-        )}
+          <li>
+            <button className={styles.logoutBtn} onClick={handleLogout}>
+              Logout
+            </button>
+          </li>
+        </>
       </ul>
     </nav>
   );

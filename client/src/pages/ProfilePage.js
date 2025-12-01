@@ -18,12 +18,9 @@ export default function ProfilePage() {
       );
       const data = response.data;
       setProfile(data);
-      console.log(data);
     } catch (error) {
       if (error.response) {
         console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
       } else {
         console.log(`Error: ${error}`);
       }
